@@ -40,6 +40,8 @@ svg.selectAll("rect")
     .on("mouseover",(d)=>{ 
 
         let tooltipElem = document.getElementById("tooltip");
+
+        tooltipElem.style.display = "block";
         
         tooltipElem.innerText = d[0] ;
 
@@ -47,6 +49,15 @@ svg.selectAll("rect")
 
         tooltipElem.style.left= xScale(new Date(d[0])) + "px";
 
+        })
+
+
+    .on("mouseout",()=>{ 
+
+        let tooltipElem = document.getElementById("tooltip");
+            
+        tooltipElem.style.display = "none";
+    
         });
 
 
