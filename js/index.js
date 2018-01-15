@@ -23,7 +23,7 @@ const yScale = d3.scaleLinear()
 const svg = d3.select("body")
               .append("svg")
               .attr("width", w)
-              .attr("height", h);
+              .attr("height", h) ;
 
 svg.selectAll("rect")
     .data(gdpData.data)
@@ -37,10 +37,18 @@ svg.selectAll("rect")
     .attr("fill","palevioletred")
     .attr("data-date",d=>d[0])
     .attr("data-gdp",d=>d[1])
-    .append("title")
-    .attr("id","tooltip")
-    .attr("data-date",d =>d[0])
-    .text(d=>`${d[0]},${d[1]}`);
+    .on("mouseover",(d)=>{ 
+
+        let tooltipElem = document.getElementById("tooltip");
+        
+        tooltipElem.innerText = d[0] ;
+
+        tooltipElem.setAttribute("data-date",d[0]);
+
+        tooltipElem.style.left= xScale(new Date(d[0])) + "px";
+
+        });
+
 
 xAxis = d3.axisBottom(xScale);
 
