@@ -7,6 +7,7 @@ const minXDomain = new Date(d3.min(gdpDataset, d=>d[0]));
 const maxXDomain = new Date(d3.max(gdpDataset, d=>d[0]));
 const minYDomain = d3.min(gdpDataset, d=>d[1]);
 const maxYDomain = d3.max(gdpDataset, d=>d[1]);
+const tooltipOffset = 50;
 const fccTestFudge = -5.5;  // to pass FCC test
 
 const xScale = d3.scaleTime()
@@ -43,11 +44,11 @@ svg.selectAll("rect")
 
         tooltipElem.style.display = "block";
         
-        tooltipElem.innerText = d[0] ;
+        tooltipElem.innerText = `${d[0]}\n$${d[1]} Billion` ;
 
         tooltipElem.setAttribute("data-date",d[0]);
 
-        tooltipElem.style.left= xScale(new Date(d[0])) + "px";
+        tooltipElem.style.left= (xScale(new Date(d[0])) + tooltipOffset) + "px";
 
         })
 
